@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Gemma 4 Good Notes · Red Team Kitchen"
+  description="A concise archive of Red Team Kitchen's Gemma 4 Good local-agent work: Mercury, Cortex, local hardware, negative results, and the Cloudflare-first path forward."
+  noIndex={false}
+>
+  <section class="hero wrap">
+    <p class="eyebrow">Gemma 4 Good archive</p>
+    <h1>
+      <span class="g">G</span><span class="e">e</span><span class="m1">m</span><span class="m2">m</span><span class="a">a</span>
+      <span class="dim">was the local-first test bed.</span>
+    </h1>
+    <p class="lede">
+      The Gemma 4 Good work taught us where local inference is genuinely useful:
+      small teams, private data, owned hardware, and demos where the marginal cost
+      matters. It also taught us where a public website should not depend on a
+      desktop GPU being online.
+    </p>
+    <div class="cta-row">
+      <a class="cta primary" href="/mercury">Mercury archive</a>
+      <a class="cta" href="/cortex">Cortex gallery</a>
+      <a class="cta" href="https://github.com/AlexiosBluffMara/mercury">Mercury GitHub</a>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>What Stays</h2>
+    <div class="notes">
+      <article>
+        <p class="tag">Local inference</p>
+        <h3>Worth keeping</h3>
+        <p>
+          Gemma on owned hardware is still a strong story for privacy, experimentation,
+          and predictable costs. It belongs behind well-defined tools and reproducible
+          runbooks, not vague live-demo promises.
+        </p>
+      </article>
+      <article>
+        <p class="tag">Mercury</p>
+        <h3>Use Hermes directly</h3>
+        <p>
+          The fork produced useful integration work, but carrying a long-lived fork is
+          the wrong maintenance burden right now. Keep adapters small and upstream what
+          is generally useful.
+        </p>
+      </article>
+      <article>
+        <p class="tag">Cortex</p>
+        <h3>Publish artifacts first</h3>
+        <p>
+          Cortex should have a static Cloudflare-backed gallery of videos, thumbnails,
+          metadata, and recordings. The live upload app can remain a lab mode while the
+          PC is available.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2>Cloudflare-First Shape</h2>
+    <p class="muted">
+      Code lives in Git and deploys to Cloudflare Pages. Media lives in Cloudflare R2
+      and is referenced by a checked-in manifest. Dynamic Cortex compute stays local
+      until we have a better cloud GPU story; every public page should still be useful
+      when Seratonin is off.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding-top: var(--rtk-sp-8); }
+  .eyebrow {
+    color: var(--rtk-isu-gold);
+    font-family: var(--rtk-font-mono);
+    font-size: var(--rtk-fs-sm);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: var(--rtk-sp-4);
+  }
+  h1 {
+    font-size: clamp(3rem, 6vw + 1rem, 5rem);
+    margin-bottom: var(--rtk-sp-5);
+  }
+  h1 .g  { color: #4285F4; }
+  h1 .e  { color: #EA4335; }
+  h1 .m1 { color: #FBBC04; }
+  h1 .m2 { color: #34A853; }
+  h1 .a  { color: #4285F4; }
+  h1 .dim { color: var(--rtk-text-muted); display: block; font-weight: 400; margin-top: 0.2em; font-size: 0.55em; }
+
+  .lede,
+  .muted {
+    color: var(--rtk-text-muted);
+    max-width: 66ch;
+    font-size: var(--rtk-fs-md);
+  }
+  .lede { margin-bottom: var(--rtk-sp-7); }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: var(--rtk-sp-3); }
+  .cta {
+    display: inline-block;
+    padding: var(--rtk-sp-3) var(--rtk-sp-5);
+    border: 1px solid var(--rtk-border-strong);
+    border-radius: var(--rtk-radius-pill);
+    color: var(--rtk-text);
+    font-size: var(--rtk-fs-sm);
+  }
+  .cta:hover { background: var(--rtk-surface-2); }
+  .cta.primary {
+    background: var(--rtk-cardinal);
+    border-color: var(--rtk-cardinal);
+    color: var(--rtk-text-on-cardinal);
+  }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--rtk-sp-5);
+    margin-top: var(--rtk-sp-5);
+  }
+  .notes article {
+    border: 1px solid var(--rtk-border);
+    border-radius: var(--rtk-radius-sm);
+    background: var(--rtk-surface-1);
+    padding: var(--rtk-sp-5);
+  }
+  .notes .tag {
+    color: var(--rtk-isu-gold);
+    font-family: var(--rtk-font-mono);
+    font-size: var(--rtk-fs-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 var(--rtk-sp-3);
+  }
+  .notes p { color: var(--rtk-text-muted); }
+</style>

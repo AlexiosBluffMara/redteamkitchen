@@ -1,0 +1,113 @@
+/*
+ * Red Team Kitchen — design tokens.
+ * Source-of-truth for colors, type, spacing, motion across redteamkitchen.com,
+ * gemma.redteamkitchen.com, and (eventually) the Mercury app shell.
+ *
+ * Naming convention: --rtk-{category}-{name}-{modifier?}
+ *
+ * NOTE on fonts: Google's "Google Sans" / "Google Sans Display" are NOT publicly
+ * licensed for third-party use — they ship only on Google products. We use:
+ *   - Roboto Flex (public on Google Fonts) as our Google-Sans-like body
+ *   - Roboto Serif (public) as display/editorial
+ *   - Google Sans Code (public on Google Fonts since 2025) for monospace
+ *   - System fallbacks at the end of every stack
+ * If we are ever invited into a Google partnership where Google Sans is licensed
+ * to us, swap the first item in --rtk-font-sans / --rtk-font-display.
+ */
+
+:root {
+  /* ───── Brand (ISU + ABM) ───── */
+  --rtk-cardinal:        #CC0000;
+  --rtk-cardinal-bright: #ee2d3f;
+  --rtk-cardinal-deep:   #9c0d1d;
+  --rtk-isu-gold:        #F6A917;
+  --rtk-isu-gold-bright: #ffc24a;
+  --rtk-isu-blue:        #56758f;
+  --rtk-isu-blue-bright: #7ea2c0;
+
+  /* ───── Surfaces (Material 3 elevation analog, dark default) ───── */
+  --rtk-bg:             #0a0b0e;
+  --rtk-surface-1:      #14151c;
+  --rtk-surface-2:      #1c1e28;
+  --rtk-surface-3:      #242635;
+  --rtk-border:         #262834;
+  --rtk-border-strong:  #383a47;
+
+  /* ───── Text ───── */
+  --rtk-text:           #f0f2f6;
+  --rtk-text-muted:     #8b8d96;
+  --rtk-text-faint:     #5c5e69;
+  --rtk-text-on-cardinal: #ffffff;
+
+  /* ───── Type stacks ───── */
+  --rtk-font-sans:    "Roboto Flex", "Inter", "Google Sans", "Open Sans",
+                      ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+                      "Segoe UI", sans-serif;
+  --rtk-font-display: "Roboto Serif", "Google Sans Display", "PT Serif",
+                      Georgia, "Times New Roman", serif;
+  --rtk-font-mono:    "Google Sans Code", "JetBrains Mono", ui-monospace,
+                      "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale — major third (1.25), Apple/Material common ratio */
+  --rtk-fs-xs:   0.75rem;   /* 12px */
+  --rtk-fs-sm:   0.875rem;  /* 14px */
+  --rtk-fs-base: 1rem;      /* 16px */
+  --rtk-fs-md:   1.125rem;  /* 18px */
+  --rtk-fs-lg:   1.25rem;   /* 20px */
+  --rtk-fs-xl:   1.5rem;    /* 24px */
+  --rtk-fs-2xl:  2rem;      /* 32px */
+  --rtk-fs-3xl:  2.5rem;    /* 40px */
+  --rtk-fs-4xl:  3.25rem;   /* 52px */
+  --rtk-fs-5xl:  4.25rem;   /* 68px */
+
+  /* ───── Spacing — 4px base ───── */
+  --rtk-sp-1:  0.25rem;
+  --rtk-sp-2:  0.5rem;
+  --rtk-sp-3:  0.75rem;
+  --rtk-sp-4:  1rem;
+  --rtk-sp-5:  1.5rem;
+  --rtk-sp-6:  2rem;
+  --rtk-sp-7:  3rem;
+  --rtk-sp-8:  4rem;
+  --rtk-sp-9:  6rem;
+  --rtk-sp-10: 8rem;
+
+  /* ───── Layout ───── */
+  --rtk-max:   1080px;
+  --rtk-max-narrow: 720px;
+  --rtk-max-wide:   1280px;
+
+  /* ───── Radii ───── */
+  --rtk-radius-sm:   6px;
+  --rtk-radius:      14px;
+  --rtk-radius-lg:   20px;
+  --rtk-radius-pill: 9999px;
+
+  /* ───── Motion (Material 3 expressive springs) ───── */
+  --rtk-ease-emphasized:        cubic-bezier(0.2, 0, 0, 1);
+  --rtk-ease-emphasized-decel:  cubic-bezier(0.05, 0.7, 0.1, 1);
+  --rtk-ease-emphasized-accel:  cubic-bezier(0.3, 0, 0.8, 0.15);
+  --rtk-ease-standard:          cubic-bezier(0.2, 0, 0, 1);
+  --rtk-dur-short-1:  100ms;
+  --rtk-dur-short-2:  150ms;
+  --rtk-dur-medium-1: 250ms;
+  --rtk-dur-medium-2: 350ms;
+  --rtk-dur-long-1:   500ms;
+  --rtk-dur-long-2:   700ms;
+
+  /* ───── Shadows (Apple-style, restrained) ───── */
+  --rtk-shadow-1: 0 1px 2px rgba(0,0,0,0.4);
+  --rtk-shadow-2: 0 4px 12px rgba(0,0,0,0.5);
+  --rtk-shadow-3: 0 12px 32px rgba(0,0,0,0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --rtk-dur-short-1:  0ms;
+    --rtk-dur-short-2:  0ms;
+    --rtk-dur-medium-1: 0ms;
+    --rtk-dur-medium-2: 0ms;
+    --rtk-dur-long-1:   0ms;
+    --rtk-dur-long-2:   0ms;
+  }
+}

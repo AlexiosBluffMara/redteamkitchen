@@ -1,0 +1,47 @@
+name: Deploy → staging (redteamkitchen-v2)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    name: Build + push to staging
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://redteamkitchen-v2.pages.dev
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=redteamkitchen-v2 --branch=main --commit-dirty=true
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Staging deploy" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Project: \`redteamkitchen-v2\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Preview URL: https://redteamkitchen-v2.pages.dev" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"

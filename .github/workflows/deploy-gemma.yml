@@ -1,0 +1,47 @@
+name: Deploy → gemma (redteamkitchen-gemma)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-gemma
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    name: Build + push to gemma.redteamkitchen.com
+    runs-on: ubuntu-latest
+    environment:
+      name: gemma
+      url: https://gemma.redteamkitchen.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=redteamkitchen-gemma --branch=main --commit-dirty=true
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Gemma deploy" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Project: \`redteamkitchen-gemma\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Live URL: https://gemma.redteamkitchen.com" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"

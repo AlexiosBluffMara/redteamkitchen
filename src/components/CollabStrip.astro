@@ -1,0 +1,36 @@
+---
+// UNIQLO-style collab strip — preserves the existing site's framing.
+---
+<div class="collab-strip">
+  <div class="collab-mark">
+    <span class="lhs">Alexios Bluff Mara</span>
+    <span class="x">×</span>
+    <a class="rhs" href="https://illinoisstate.edu">Illinois State University</a>
+  </div>
+  <div class="collab-meta">Research Collaboration · Cardinal &amp; Code</div>
+</div>
+
+<style>
+  .collab-strip {
+    background: var(--rtk-bg);
+    border-bottom: 1px solid var(--rtk-border);
+    padding: var(--rtk-sp-5) var(--rtk-sp-6);
+    text-align: center;
+  }
+  .collab-mark {
+    font-family: var(--rtk-font-display);
+    font-size: var(--rtk-fs-md);
+    letter-spacing: 0.02em;
+  }
+  .collab-mark .lhs { color: var(--rtk-text); font-weight: 600; }
+  .collab-mark .x   { color: var(--rtk-cardinal); margin: 0 0.5em; font-weight: 700; }
+  .collab-mark .rhs { color: var(--rtk-isu-gold); font-weight: 600; border-bottom: none; }
+  .collab-mark .rhs:hover { color: var(--rtk-isu-gold-bright); }
+  .collab-meta {
+    margin-top: var(--rtk-sp-1);
+    color: var(--rtk-text-muted);
+    font-size: var(--rtk-fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>

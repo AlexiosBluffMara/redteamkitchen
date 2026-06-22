@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Red Team Kitchen — Cardinal & Code"
+  description="Red Team Kitchen collects the public work of Alexios Bluff Mara LLC: Cortex, a Nous Research x Kimi brain-viewer project, and Mercury, a Gemma 4 Good local-agent experiment."
+>
+  <section class="hero wrap">
+    <p class="eyebrow">Red Team Kitchen</p>
+    <h1>Research demos, kept honest. <span class="cardinal">Code, artifacts, and the parts that still need a better architecture.</span></h1>
+    <p class="lede">
+      Red Team Kitchen is the operating name of Alexios Bluff Mara LLC, a research-and-software
+      lab in collaboration with Illinois State University. This site is being rebuilt as the
+      stable public archive for our hackathon and research projects: what shipped, what did not,
+      what can be replayed from the edge, and what still depends on the Seratonin RTX 5090 desktop
+      being awake.
+    </p>
+    <div class="cta-row">
+      <a class="cta primary" href="/cortex">Open Cortex</a>
+      <a class="cta" href="/cortex">Cortex</a>
+      <a class="cta" href="/mercury">Mercury</a>
+      <a class="cta" href="https://github.com/AlexiosBluffMara">GitHub</a>
+    </div>
+  </section>
+
+  <section class="project-grid wrap">
+    <article class="project-card">
+      <p class="tag">Nous Research × Kimi Hackathon</p>
+      <h2>Cortex</h2>
+      <p>
+        A browser brain viewer for TRIBE v2 predictions: submitted media becomes a 20,484-vertex
+        cortical response, an ASCII brain-video artifact, and four narrations. The interactive app
+        is working locally again on the 5090, but public live mode depends on that PC being online.
+      </p>
+      <a href="/cortex">View the Cortex page</a>
+    </article>
+
+    <article class="project-card">
+      <p class="tag">Gemma 4 Good Hackathon</p>
+      <h2>Mercury</h2>
+      <p>
+        A local-first agent experiment built from the Hermes codebase. The useful result is the
+        evaluation and integration work; the current direction is to use Hermes directly instead of
+        maintaining a separate long-lived fork.
+      </p>
+      <a href="/mercury">View the Mercury archive</a>
+    </article>
+
+    <article class="project-card">
+      <p class="tag">Infrastructure</p>
+      <h2>Cloudflare + Git</h2>
+      <p>
+        The healthy target is boring on purpose: Astro in Git, Cloudflare Pages for the site,
+        R2 for durable media, and a clearly marked live Cortex tunnel only when the desktop is
+        available.
+      </p>
+      <a href="/gemma">Read the Gemma notes</a>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: left;
+  }
+  .eyebrow {
+    color: var(--rtk-isu-gold);
+    font-family: var(--rtk-font-mono);
+    font-size: var(--rtk-fs-sm);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: var(--rtk-sp-4);
+  }
+  h1 {
+    font-size: clamp(2.25rem, 4vw + 1rem, 4.25rem);
+    max-width: 20ch;
+  }
+  .cardinal { color: var(--rtk-cardinal-bright); }
+  .lede {
+    color: var(--rtk-text-muted);
+    max-width: 60ch;
+    font-size: var(--rtk-fs-md);
+    margin: var(--rtk-sp-5) 0 var(--rtk-sp-7);
+  }
+  .lede strong { color: var(--rtk-text); }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: var(--rtk-sp-3); }
+  .cta {
+    display: inline-block;
+    padding: var(--rtk-sp-3) var(--rtk-sp-5);
+    border: 1px solid var(--rtk-border-strong);
+    border-radius: var(--rtk-radius-pill);
+    color: var(--rtk-text);
+    font-size: var(--rtk-fs-sm);
+    transition: background var(--rtk-dur-short-2) var(--rtk-ease-standard),
+                border-color var(--rtk-dur-short-2) var(--rtk-ease-standard);
+  }
+  .cta:hover { background: var(--rtk-surface-2); border-color: var(--rtk-text-muted); }
+  .cta.primary {
+    background: var(--rtk-cardinal);
+    border-color: var(--rtk-cardinal);
+    color: var(--rtk-text-on-cardinal);
+  }
+  .cta.primary:hover { background: var(--rtk-cardinal-bright); border-color: var(--rtk-cardinal-bright); }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--rtk-sp-5);
+    padding-top: 0;
+  }
+
+  .project-card {
+    border: 1px solid var(--rtk-border);
+    border-radius: var(--rtk-radius-sm);
+    background: var(--rtk-surface-1);
+    padding: var(--rtk-sp-5);
+  }
+
+  .project-card .tag {
+    margin: 0 0 var(--rtk-sp-3);
+    color: var(--rtk-isu-gold);
+    font-family: var(--rtk-font-mono);
+    font-size: var(--rtk-fs-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-card h2 { font-size: var(--rtk-fs-xl); }
+  .project-card p { color: var(--rtk-text-muted); }
+  .project-card a {
+    display: inline-block;
+    margin-top: var(--rtk-sp-2);
+    font-size: var(--rtk-fs-sm);
+  }
+</style>

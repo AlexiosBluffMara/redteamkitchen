@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Mercury — Red Team Kitchen"
+  description="Mercury is Red Team Kitchen's Gemma 4 Good local-agent experiment and Hermes fork archive. The current recommendation is to use Hermes directly rather than maintain our own fork."
+>
+  <article class="wrap">
+    <header class="hero">
+      <div class="pills">
+        <span class="pill gold">Project · Mercury</span>
+        <span class="pill brand">Gemma 4 Good Hackathon</span>
+        <span class="pill">Hermes fork archive</span>
+      </div>
+      <h1>A local-agent experiment, <em>wrapped honestly.</em></h1>
+      <p class="lede">
+        Mercury explored a personal AI agent running through local Gemma models,
+        Discord, a dashboard, and the Cortex bridge. The important conclusion is
+        pragmatic: maintaining our own long-lived Hermes fork is not worth the
+        operational cost right now. Future work should use
+        <a href="https://github.com/NousResearch/hermes-agent">Hermes directly</a>
+        and keep Red Team Kitchen additions small, documented, and upstreamable.
+      </p>
+      <div class="ctas">
+        <a class="cta primary" href="https://github.com/AlexiosBluffMara/mercury">Mercury GitHub</a>
+        <a class="cta" href="https://github.com/NousResearch/hermes-agent">Hermes upstream</a>
+        <a class="cta" href="/gemma">Gemma notes</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>What We Accomplished</h2>
+      <div class="panel">
+        <ul>
+          <li><strong>Local Gemma routing:</strong> tested Gemma 4 paths on owned hardware and documented the performance/cost tradeoffs.</li>
+          <li><strong>Gateway surfaces:</strong> proved out terminal, Discord, and dashboard workflows around a shared local agent state.</li>
+          <li><strong>Cortex bridge:</strong> connected the agent stack to the brain-response pipeline and helped produce the viewer/demo artifacts.</li>
+          <li><strong>Negative results:</strong> documented when speculative paths and routing promises did not beat simpler local execution.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>What We Are Not Claiming</h2>
+      <p>
+        Mercury is not a currently hosted public agent and should not be linked as a
+        live service. The repo remains useful as a record of the Gemma 4 Good
+        experiment, the scripts, the measurements, and the infrastructure lessons.
+        The next healthy version should be a thin integration layer around Hermes,
+        not a divergent product fork we have to babysit forever.
+      </p>
+    </section>
+
+    <section>
+      <h2>Repository</h2>
+      <p>
+        Source stays available at
+        <a href="https://github.com/AlexiosBluffMara/mercury">github.com/AlexiosBluffMara/mercury</a>.
+        New work should either happen upstream in Hermes or live in small Red Team
+        Kitchen adapters with clear boundaries.
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-top: var(--rtk-sp-7); }
+  .pills { display: flex; flex-wrap: wrap; gap: var(--rtk-sp-2); margin-bottom: var(--rtk-sp-4); }
+  .pill {
+    padding: 4px 12px;
+    border-radius: var(--rtk-radius-pill);
+    border: 1px solid var(--rtk-border-strong);
+    font-family: var(--rtk-font-mono);
+    font-size: var(--rtk-fs-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rtk-text-muted);
+  }
+  .pill.brand { color: var(--rtk-cardinal-bright); border-color: var(--rtk-cardinal); }
+  .pill.gold  { color: var(--rtk-isu-gold-bright); border-color: var(--rtk-isu-gold); }
+
+  h1 { font-size: clamp(2.25rem, 5vw + 1rem, 4rem); margin-bottom: var(--rtk-sp-5); }
+  h1 em { color: var(--rtk-cardinal-bright); font-style: italic; }
+  .lede { color: var(--rtk-text-muted); max-width: 68ch; font-size: var(--rtk-fs-md); margin-bottom: var(--rtk-sp-6); }
+
+  .ctas { display: flex; flex-wrap: wrap; gap: var(--rtk-sp-3); margin-bottom: var(--rtk-sp-8); }
+  .cta {
+    padding: var(--rtk-sp-3) var(--rtk-sp-5);
+    border: 1px solid var(--rtk-border-strong);
+    border-radius: var(--rtk-radius-pill);
+    color: var(--rtk-text);
+    font-size: var(--rtk-fs-sm);
+  }
+  .cta:hover { background: var(--rtk-surface-2); }
+  .cta.primary { background: var(--rtk-cardinal); border-color: var(--rtk-cardinal); color: #fff; }
+
+  section { margin-bottom: var(--rtk-sp-8); }
+  p, .panel li { color: var(--rtk-text-muted); }
+  .panel {
+    border: 1px solid var(--rtk-border);
+    background: var(--rtk-surface-1);
+    border-radius: var(--rtk-radius-sm);
+    padding: var(--rtk-sp-5);
+  }
+  .panel ul { margin: 0; padding-left: 1.2rem; }
+  .panel li { margin-bottom: var(--rtk-sp-3); }
+  .panel strong { color: var(--rtk-text); }
+</style>

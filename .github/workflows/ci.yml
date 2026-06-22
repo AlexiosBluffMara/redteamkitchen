@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (Astro)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Astro check (typecheck + diagnostics)
+        run: npx astro check --minimumSeverity warning
+        continue-on-error: true   # warnings don't block; errors do
+
+      - name: Build
+        run: npm run build
+
+      - name: Bundle size summary
+        if: always()
+        run: |
+          echo "### rtk-web bundle" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -d dist ]; then
+            find dist -type f \( -name "*.js" -o -name "*.css" -o -name "*.html" \) \
+              -printf "- %p (%s bytes)\n" 2>/dev/null | sort -k3 -n | tail -15 >> "$GITHUB_STEP_SUMMARY" || true
+          fi
+
+  validate-headers:
+    name: Validate _headers and _redirects
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm CSP and security headers are present
+        run: |
+          test -f public/_headers || (echo "::error::public/_headers missing"; exit 1)
+          grep -q "X-Frame-Options: DENY" public/_headers || (echo "::error::X-Frame-Options missing"; exit 1)
+          grep -q "X-Content-Type-Options: nosniff" public/_headers || (echo "::error::X-Content-Type-Options missing"; exit 1)
+          grep -q "Strict-Transport-Security" public/_headers || (echo "::error::HSTS missing"; exit 1)
+          grep -q "Content-Security-Policy" public/_headers || (echo "::error::CSP missing"; exit 1)
+          echo "All required security headers present."

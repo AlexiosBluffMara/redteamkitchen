@@ -1,0 +1,16 @@
+# Cloudflare Pages redirects.
+
+# Old demo path now lands on the durable Cortex project page. The interactive
+# app is PC-online only and should not be the default public landing target.
+/demo     /cortex     302
+
+# Legacy .html paths (in case any external links still point at them).
+/index.html      /             301
+/cortex.html     /cortex       301
+/mercury.html    /mercury      301
+/about.html      /             301
+/contact.html    /             301
+/explain.html    /mercury      301
+/research.html   /cortex       301
+/scaling.html    /gemma        301
+/specs.html      /gemma        301

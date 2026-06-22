@@ -1,0 +1,15 @@
+# rtk-web CODEOWNERS
+
+*                              @AlexiosBluffMara/maintainers
+
+# Design system — token changes get extra eyes because they cascade.
+/src/styles/                   @AlexiosBluffMara/maintainers
+/src/styles/tokens.css         @AlexiosBluffMara/maintainers
+/DESIGN.md                     @AlexiosBluffMara/maintainers
+/CLAUDE_DESIGN.md              @AlexiosBluffMara/maintainers
+
+# Build & deploy infrastructure.
+/.github/                      @AlexiosBluffMara/maintainers
+/astro.config.mjs              @AlexiosBluffMara/maintainers
+/public/_headers               @AlexiosBluffMara/maintainers
+/public/_redirects             @AlexiosBluffMara/maintainers

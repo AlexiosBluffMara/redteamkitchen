@@ -1,0 +1,38 @@
+{
+  "name": "rtk-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Red Team Kitchen public web — Astro on Cloudflare Pages. Replaces D:/cortex/website on hard cutover. gemma.redteamkitchen.com lives at /gemma/*.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy:staging": "wrangler pages deploy ./dist --project-name redteamkitchen-v2 --commit-dirty=true",
+    "deploy:gemma": "wrangler pages deploy ./dist --project-name redteamkitchen-gemma --commit-dirty=true",
+    "deploy:prod": "wrangler pages deploy ./dist --project-name redteamkitchen --commit-dirty=true",
+    "lint": "astro check",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.0",
+    "@astrojs/sitemap": "^3.2.1",
+    "@react-three/drei": "^9.117.0",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/xr": "^6.6.0",
+    "astro": "^5.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.171.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/three": "^0.171.0",
+    "typescript": "^5.7.2",
+    "wrangler": "^3.95.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,67 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="rtk-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="brand">Red Team Kitchen</div>
+        <div class="note">Alexios Bluff Mara LLC · Chicago, IL</div>
+        <div class="note">Research collaboration with Illinois State University</div>
+      </div>
+      <div>
+        <div class="head">Projects</div>
+        <a href="/cortex">Cortex — Nous × Kimi brain viewer</a>
+        <a href="/mercury">Mercury — Gemma 4 Good archive</a>
+        <a href="/gemma">Gemma — local-first notes</a>
+      </div>
+      <div>
+        <div class="head">Source</div>
+        <a href="https://github.com/AlexiosBluffMara/cortex">Cortex on GitHub</a>
+        <a href="https://github.com/AlexiosBluffMara/mercury">Mercury on GitHub</a>
+        <a href="https://github.com/AlexiosBluffMara">GitHub org</a>
+      </div>
+    </div>
+    <div class="legal">
+      © {year} Alexios Bluff Mara LLC. Mercury is a derivative of <a href="https://github.com/NousResearch/hermes-agent">Nous Research's Hermes-agent</a> (MIT). Gemma is a trademark of Google LLC; this site is not endorsed by or affiliated with Google.
+    </div>
+  </div>
+</footer>
+
+<style>
+  .rtk-footer {
+    border-top: 1px solid var(--rtk-border);
+    background: var(--rtk-surface-1);
+    margin-top: var(--rtk-sp-10);
+  }
+  .rtk-footer .wrap { padding: var(--rtk-sp-8) var(--rtk-sp-6); }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--rtk-sp-7);
+    margin-bottom: var(--rtk-sp-6);
+  }
+  .brand {
+    font-family: var(--rtk-font-display);
+    font-size: var(--rtk-fs-lg);
+    color: var(--rtk-text);
+    margin-bottom: var(--rtk-sp-2);
+  }
+  .note  { color: var(--rtk-text-muted); font-size: var(--rtk-fs-sm); margin-bottom: var(--rtk-sp-1); }
+  .head  { color: var(--rtk-text); font-weight: 600; margin-bottom: var(--rtk-sp-3); }
+  .cols a {
+    display: block;
+    color: var(--rtk-text-muted);
+    border-bottom: none;
+    margin-bottom: var(--rtk-sp-2);
+    font-size: var(--rtk-fs-sm);
+  }
+  .cols a:hover { color: var(--rtk-cardinal-bright); }
+  .legal {
+    color: var(--rtk-text-faint);
+    font-size: var(--rtk-fs-xs);
+    border-top: 1px solid var(--rtk-border);
+    padding-top: var(--rtk-sp-4);
+  }
+  .legal a { color: var(--rtk-text-muted); }
+</style>

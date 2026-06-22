@@ -1,0 +1,68 @@
+name: Deploy → production (redteamkitchen)
+
+# Production deploy is MANUAL ONLY. The live site at redteamkitchen.com cuts
+# over to this build only when explicitly triggered, never on auto-push.
+# Staging (redteamkitchen-v2) and Gemma (redteamkitchen-gemma) auto-deploy
+# on every main merge so you can verify before promoting here.
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "PROMOTE" to confirm cutover to redteamkitchen.com'
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false  # never cancel a running prod deploy
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  guard:
+    name: Confirmation guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify confirmation token
+        run: |
+          if [ "${{ inputs.confirm }}" != "PROMOTE" ]; then
+            echo "::error::Confirmation token mismatch. Type 'PROMOTE' exactly."
+            exit 1
+          fi
+          echo "Confirmed."
+
+  deploy:
+    name: Build + push to redteamkitchen.com
+    needs: guard
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://redteamkitchen.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Publish to Cloudflare Pages (production project)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=redteamkitchen --branch=main --commit-dirty=true
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Production cutover" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Live: https://redteamkitchen.com" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Triggered by: \`${{ github.actor }}\`" >> "$GITHUB_STEP_SUMMARY"

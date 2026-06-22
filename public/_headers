@@ -1,0 +1,15 @@
+# Cloudflare Pages headers.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), xr-spatial-tracking=(self)
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self' https:; script-src 'self' 'unsafe-inline'; connect-src 'self' https://cortex.redteamkitchen.com https://status.cortex.redteamkitchen.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+# Cache static assets for a day, JS/CSS hashed-by-Astro for a year.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=86400
