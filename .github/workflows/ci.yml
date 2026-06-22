@@ -15,7 +15,7 @@ jobs:
     name: Build (Astro)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         with:
@@ -46,7 +46,7 @@ jobs:
     name: Validate _headers and _redirects
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Confirm CSP and security headers are present
         run: |
           test -f public/_headers || (echo "::error::public/_headers missing"; exit 1)
