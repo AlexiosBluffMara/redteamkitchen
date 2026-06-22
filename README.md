@@ -58,7 +58,7 @@ Short version:
 
 1. ✅ Build the Astro shell and project pages.
 2. ✅ Remove stale Tailscale/Funnel links from public copy.
-3. ✅ Add local Cortex gallery/video artifacts for preview.
+3. ✅ Add local Cortex brain-surface gallery preview artifact.
 4. ✅ Initialize Git locally for this folder.
 5. ⏳ Attach a GitHub remote and push `main`.
 6. ⏳ Create or confirm Cloudflare Pages staging projects.

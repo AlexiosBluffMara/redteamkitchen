@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="Cortex — Red Team Kitchen"
-  description="Cortex is a Nous Research x Kimi Hackathon brain-viewer project: TRIBE v2 predictions, Gemma narration, and durable gallery recordings from the local RTX 5090 stack."
+  description="Cortex is a Nous Research x Kimi Hackathon brain-viewer project: TRIBE v2 predictions, Gemma narration, and Three.js cortical-surface previews from the local RTX 5090 stack."
 >
   <article class="wrap">
     <header class="hero">
@@ -15,7 +15,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h1>Brain-response media, <em>made visible.</em></h1>
       <p class="lede">
         Cortex turns submitted media into a TRIBE v2 cortical-response prediction, a
-        3D/ASCII brain visualization, and four parallel narrations. The first viewer
+        Three.js cortical-surface playback, and four parallel narrations. The first viewer
         was built during the Nous Research × Kimi sprint; the work later pointed us
         toward deeper MRI and fMRI research questions that deserve a slower, more
         rigorous follow-up.
@@ -45,26 +45,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section>
       <h2>Gallery Artifacts</h2>
       <div class="media-grid">
-        <article class="media-card">
-          <video controls preload="metadata" src="/media/cortex/cortex_gallery_captioned.mp4"></video>
+        <article class="media-card wide">
+          <img src="/media/cortex/cortex-gallery-brain-preview.png" alt="Cortex gallery cards showing 3D cortical surface previews lit by predicted BOLD activity." />
           <div>
-            <p class="tag">Gallery recording</p>
-            <h3>Completed scans, narrations, and regions</h3>
+            <p class="tag">Gallery preview</p>
+            <h3>Completed scans rendered on the 3D cortical surface</h3>
             <p>
-              A captioned recording of the local gallery surface. This is the kind of
-              asset we can serve reliably from Cloudflare without keeping the 5090
-              app public every minute of the day.
-            </p>
-          </div>
-        </article>
-        <article class="media-card">
-          <video controls loop muted preload="metadata" src="/media/cortex/artemis_launch_brain_ascii.mp4"></video>
-          <div>
-            <p class="tag">TRIBE output</p>
-            <h3>Artemis launch brain-response clip</h3>
-            <p>
-              A generated BOLD-response video from a completed Cortex scan. These
-              artifacts are small, portable, and ideal for the public gallery.
+              The local gallery now uses the same Three.js fsaverage5 brain surface as
+              the live viewer: true per-vertex BOLD when a persisted TRIBE array exists,
+              and regional BOLD fallback for still-image scans. This screenshot is the
+              durable Cloudflare-safe preview while we record a polished public video.
             </p>
           </div>
         </article>
@@ -75,7 +65,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>What It Proved</h2>
       <div class="panel">
         <ul>
-          <li><strong>Working local pipeline:</strong> the FastAPI app, TRIBE v2 outputs, generated brain videos, and scan registry all work on the local RTX 5090 machine.</li>
+          <li><strong>Working local pipeline:</strong> the FastAPI app, TRIBE v2 outputs, Three.js brain-surface previews, and scan registry all work on the local RTX 5090 machine.</li>
           <li><strong>Public strategy change:</strong> dynamic uploads should not be the default public promise; static artifacts should carry the website.</li>
           <li><strong>Research direction:</strong> the project is a prototype for media-to-brain-response exploration, not a diagnostic tool or a substitute for clinical fMRI.</li>
           <li><strong>Source:</strong> <a href="https://github.com/AlexiosBluffMara/cortex">github.com/AlexiosBluffMara/cortex</a>.</li>
@@ -146,12 +136,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: var(--rtk-radius-sm);
     overflow: hidden;
   }
+  .media-card img,
   .media-card video {
     width: 100%;
     aspect-ratio: 16 / 9;
     display: block;
+    object-fit: cover;
     background: #000;
   }
+  .media-card.wide { grid-column: 1 / -1; }
   .media-card div { padding: var(--rtk-sp-5); }
   .media-card .tag {
     margin: 0 0 var(--rtk-sp-2);
