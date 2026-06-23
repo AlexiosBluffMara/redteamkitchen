@@ -11,7 +11,7 @@ This project is the strangler-fig replacement for `D:/cortex/website` (plain sta
 | Public site | `redteamkitchen.com` | Project archive, Cortex gallery artifacts, Mercury wrap-up |
 | Cortex live lab | `cortex.redteamkitchen.com` | Optional Cloudflare Tunnel to the local PC when Seratonin is online |
 | Durable media | Cloudflare R2 (planned) | Gallery videos, thumbnails, scan JSON, demo recordings |
-| Source | GitHub (planned for this folder) | Code review, change history, Cloudflare Pages deploys |
+| Source | `github.com/AlexiosBluffMara/redteamkitchen` | Code review, change history, Cloudflare Pages deploys |
 
 ## Stack
 
@@ -52,6 +52,8 @@ npm run deploy:prod      # ⚠ replaces the live site, only after sign-off
 
 Current Cloudflare production is still an ad-hoc Pages upload. The healthy target is GitHub-backed source control plus explicit GitHub Actions deploys. Production remains manual-only.
 
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full hosting and project architecture.
+
 ## Migration plan
 
 Short version:
@@ -60,10 +62,10 @@ Short version:
 2. ✅ Remove stale Tailscale/Funnel links from public copy.
 3. ✅ Add local Cortex brain-surface gallery preview artifact.
 4. ✅ Initialize Git locally for this folder.
-5. ⏳ Attach a GitHub remote and push `main`.
-6. ⏳ Create or confirm Cloudflare Pages staging projects.
+5. ✅ Attach a GitHub remote and push `main`.
+6. ✅ Create or confirm Cloudflare Pages staging projects.
 7. ⏳ Move durable Cortex media to Cloudflare R2 and replace local preview paths with manifest-driven R2 URLs.
-8. ⏳ Promote to `redteamkitchen.com` only after staging review.
+8. ✅ Promote the current static takeover to `redteamkitchen.com`.
 
 ## License
 

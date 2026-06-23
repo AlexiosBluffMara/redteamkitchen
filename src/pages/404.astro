@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Not Found — Red Team Kitchen"
+  description="The requested Red Team Kitchen page was not found."
+>
+  <section class="wrap not-found" aria-labelledby="not-found-title">
+    <p class="eyebrow">404</p>
+    <h1 id="not-found-title">That route is not in the kitchen.</h1>
+    <p>
+      The current public site is intentionally small: Cortex, Mercury, and the
+      Gemma 4 Good archive. Older research URLs are being ported deliberately
+      instead of silently pretending every missing page is the homepage.
+    </p>
+    <div class="ctas">
+      <a class="cta primary" href="/cortex">Open Cortex</a>
+      <a class="cta" href="/mercury">Mercury archive</a>
+      <a class="cta" href="/gemma">Gemma notes</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 62vh;
+    display: grid;
+    align-content: center;
+    padding-top: var(--rtk-sp-8);
+    padding-bottom: var(--rtk-sp-8);
+  }
+
+  .eyebrow {
+    margin: 0 0 var(--rtk-sp-3);
+    color: var(--rtk-cardinal-bright);
+    font-family: var(--rtk-font-mono);
+    font-size: var(--rtk-fs-sm);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin-bottom: var(--rtk-sp-5);
+    font-size: clamp(2.4rem, 5vw + 1rem, 4.5rem);
+  }
+
+  p:not(.eyebrow) {
+    max-width: 66ch;
+    color: var(--rtk-text-muted);
+    font-size: var(--rtk-fs-md);
+  }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--rtk-sp-3);
+    margin-top: var(--rtk-sp-6);
+  }
+
+  .cta {
+    padding: var(--rtk-sp-3) var(--rtk-sp-5);
+    border: 1px solid var(--rtk-border-strong);
+    border-radius: var(--rtk-radius-pill);
+    color: var(--rtk-text);
+    font-size: var(--rtk-fs-sm);
+  }
+
+  .cta:hover {
+    background: var(--rtk-surface-2);
+  }
+
+  .cta.primary {
+    background: var(--rtk-cardinal);
+    border-color: var(--rtk-cardinal);
+    color: #fff;
+  }
+</style>
